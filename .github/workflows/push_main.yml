@@ -1,0 +1,42 @@
+name: Push to main
+
+on: [push]
+
+jobs:
+  push_main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+          path: .
+
+      - run: git rm -rf .
+
+      - name: Checkout dev branch
+        uses: actions/checkout@v2
+        with:
+          ref: dev
+          path: ./dev
+
+      - run: sudo apt-get install tree
+      - run: tree
+
+      - run: cp -r ./dev/examples ./examples
+      - run: cp -r ./dev/src ./src
+      - run: cp ./dev/LICENSE ./LICENSE
+      - run: cp ./dev/README.md ./README.md
+      - run: cp ./dev/keywords.txt ./keywords.txt
+      - run: cp ./dev/library.properties ./library.properties
+
+      - run: tree
+
+      - uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Main Push Robot
+          author_email: robot@example.com
+          message: "Committing dev changes"
+          branch: main
+          add: "examples src LICENSE README.md keywords.txt library.properties"

@@ -1,0 +1,46 @@
+name: Make docs and publish to GitHub Pages
+
+on: [push]
+
+jobs:
+  make_docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v2
+
+      - name: Checkout docs branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          path: ./gh-pages
+
+      - run: cd gh-pages; git rm -rf . ; cd ..
+
+      - run: sudo mv -f src gh-pages/src
+      - run: sudo mv -f examples gh-pages/examples
+      - run: sudo mv -f extras gh-pages/extras
+      - run: sudo cp README.md gh-pages/README.md
+
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@v1.1.0
+        with:
+          working-directory: ./gh-pages
+          doxyfile-path: ../Doxyfile
+
+      - run: sudo apt-get install tree
+
+      - run: sudo touch gh-pages/html/.nojekyll
+      - run: mv gh-pages/html gh-pages/docs
+
+      - run: tree
+
+      - uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Docs Robot
+          author_email: robot@example.com
+          message: "Committing documentation changes"
+          branch: gh-pages
+          cwd: ./gh-pages/
+          add: docs

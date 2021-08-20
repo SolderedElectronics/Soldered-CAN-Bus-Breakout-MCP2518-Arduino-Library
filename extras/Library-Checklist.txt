@@ -1,0 +1,52 @@
+✅ | Make coffee
+❌ | Create repo from https://github.com/e-radionicacom/Generic-easyC, be sure to check "Include all branches"
+    | Be sure to name it Soldered-[sensor name]-Arduino-Library
+❌ | Checkout dev branch and make changes here only.
+❌ | Rename src/Generic-easyC-SOLDERED.h/.cpp to src/[sensor name]-SOLDERED.h/.cpp
+❌ | Change #include "Generic-easyC-SOLDERED.h" to #include "[sensor name]-SOLDERED.h" in [sensor name]-SOLDERED.cpp
+❌ | Change Sensor class in the same file to [sensor name] and all the constructors too
+❌ | Write firmware for Attiny if necessary
+❌ | Write an API wrapper (add native contructor and initializeNative functions if native is supported)
+    | For only easyC sensors, 
+        - constructor is only constructor()
+        - begin is begin() which default adress to 0x30 and begin(address)
+    | For only native sensors:
+        - constructor is only constructor(pins...)
+        - begin is only begin()
+    | For both native and easyC
+        - constructors are constructor() and constructor(pins...)
+        - begin is begin() or begin(address)
+    | (easyC class has all except constructor(pins...) which are stored in sensor class itself, excess functions should be commented out)
+    | use native flag if native constructor is called
+❌ | Document library code using doxygen tags (set PROJECT_NAME, PROJECT_NUMBER and PROJECT_BRIEF)
+❌ | Write some basic examples and document them as in example Template, be sure to change @file tag to new example name too
+    | Be sure to add lots of comments
+    | In every example add link to the board page using format solde.red/[sku]
+    | Get board sku here:
+        - https://docs.google.com/spreadsheets/d/1OgNTXLb2BICWH0ZpkS87TvWyUalTrakakhnibQFRWnQ/edit?usp=sharing
+❌ | Fill in README.md
+    | Be sure to change
+        [![Compile Sketches](https://github.com/e-radionicacom/Generic-easyC/actions/workflows/compile_test.yml/badge.svg?branch=dev)](https://github.com/e-radionicacom/[repo name]/actions/workflows/compile_test.yml)
+        [![Make docs and publish to GitHub Pages](https://github.com/e-radionicacom/Generic-easyC/actions/workflows/make_docs.yml/badge.svg?branch=dev)](https://github.com/e-radionicacom/[repo name]/actions/workflows/make_docs.yml)
+    | Lines to this repo link e.g. (4 places, scroll to the right for other)
+            [![Compile Sketches](https://github.com/e-radionicacom/[repo name]/actions/workflows/compile_test.yml/badge.svg?branch=dev)](https://github.com/e-radionicacom/[repo name]/actions/workflows/compile_test.yml)
+            [![Make docs and publish to GitHub Pages](https://github.com/e-radionicacom/[repo name]/actions/workflows/make_docs.yml/badge.svg?branch=dev)](https://github.com/e-radionicacom/[repo name]/actions/workflows/make_docs.yml)
+    | Also change link to docs to the one provided by GH-pages
+❌ | Fill in keywords.txt with added function names
+❌ | Fill in library.properties with:
+    | Library name
+    | Describe library with a sentence and a paragraph
+    | Change category accordingly
+    | Change main .h file to [sensor name]-SOLDERED.h
+❌ | Update Doxyfile with
+    | PROJECT_NAME   - to [sensor name]
+    | PROJECT_NUMBER - to 1.0.0
+    | PROJECT_BRIEF  - same as library.properties paragraph
+❌ | Update @authors to your name in all source files (search and replace in vsc works fine)
+❌ | Push to dev
+    | Check if Github Actions made a push to main and if so make a release with version 1.0.0
+❌ | Set GitHub pages settings
+    | Visit https://github.com/e-radionicacom/[repo name]/settings/pages
+    | Change to gh-pages branch and /docs folder
+❌ | Check if docs are made correctly
+❌ | PR to Arduino Library Manager if not done already
