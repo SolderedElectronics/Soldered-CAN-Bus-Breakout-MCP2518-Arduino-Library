@@ -133,6 +133,7 @@ public:
                         // changed so that we can return to it later
         mcpMode = (CAN_OPERATION_MODE)opMode;
     }
+    return 0;
   }
   virtual byte getMode();
   virtual byte checkError(uint8_t* err_ptr = NULL);
