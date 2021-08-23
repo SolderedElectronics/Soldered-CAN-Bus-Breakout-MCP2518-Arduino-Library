@@ -2022,6 +2022,7 @@ byte mcp2518fd::init_Filt_Mask(byte num, byte ext, unsigned long f, unsigned lon
     bool filterEnable = true;                                         
     mcp2518fd_FilterToFifoLink((CAN_FILTER)num, APP_RX_FIFO, filterEnable);
     
+    return 0;
 }
 
 /*********************************************************************************************************
