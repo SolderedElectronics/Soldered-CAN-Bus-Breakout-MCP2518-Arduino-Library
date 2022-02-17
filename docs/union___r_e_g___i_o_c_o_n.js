@@ -1,0 +1,27 @@
+var union___r_e_g___i_o_c_o_n =
+[
+    [ "AutoSleepEnable", "union___r_e_g___i_o_c_o_n.html#ac568c8dd771d8f7c0142d31058c49897", null ],
+    [ "bF", "union___r_e_g___i_o_c_o_n.html#a31734688a71b9148722b1782a5bb5591", null ],
+    [ "byte", "union___r_e_g___i_o_c_o_n.html#a61e038fdb9b0758a6bfc8e01c96f47f7", null ],
+    [ "ClearAutoSleepOnMatch", "union___r_e_g___i_o_c_o_n.html#a9839798e69ef96ae69663a880ad13c40", null ],
+    [ "GPIO0", "union___r_e_g___i_o_c_o_n.html#a929fc66ad7b930cc9774edec4811ab95", null ],
+    [ "GPIO1", "union___r_e_g___i_o_c_o_n.html#a9e3b6d64b4df903c13b04099f7021be4", null ],
+    [ "HVDETSEL", "union___r_e_g___i_o_c_o_n.html#aa57dda943043f3d470bdb0e909b7a163", null ],
+    [ "INTPinOpenDrain", "union___r_e_g___i_o_c_o_n.html#a39c378695c072645fba6111fef82f218", null ],
+    [ "LAT0", "union___r_e_g___i_o_c_o_n.html#a6178f8cc96372cc46898fa3da6e61033", null ],
+    [ "LAT1", "union___r_e_g___i_o_c_o_n.html#a4896ada65fc48c35c96fd4d437e7597b", null ],
+    [ "PinMode0", "union___r_e_g___i_o_c_o_n.html#ae92975728c1690a3343b925800527d8a", null ],
+    [ "PinMode1", "union___r_e_g___i_o_c_o_n.html#a5b396200e1e3ddfd48cb34c0c746b140", null ],
+    [ "SOFOutputEnable", "union___r_e_g___i_o_c_o_n.html#a636d8854fa80fd36b26a2781c8bec3de", null ],
+    [ "TRIS0", "union___r_e_g___i_o_c_o_n.html#a6bdff13589443f01d2e635afc6ba0f80", null ],
+    [ "TRIS1", "union___r_e_g___i_o_c_o_n.html#a40cf4f7c657f4319f79ca84dd31f759c", null ],
+    [ "TXCANOpenDrain", "union___r_e_g___i_o_c_o_n.html#a3a539513b708caa7ad858fd09cb4c4b6", null ],
+    [ "unimplemented1", "union___r_e_g___i_o_c_o_n.html#a471533273889ef7f086c90b48835c4be", null ],
+    [ "unimplemented2", "union___r_e_g___i_o_c_o_n.html#a82c9c47b3e1d858a8fc42a3f3f8349b4", null ],
+    [ "unimplemented3", "union___r_e_g___i_o_c_o_n.html#ab3de636d09309f6eaacb48ba743114df", null ],
+    [ "unimplemented4", "union___r_e_g___i_o_c_o_n.html#a340f7c40a27bbda4892d39e1d05173e1", null ],
+    [ "unimplemented5", "union___r_e_g___i_o_c_o_n.html#aadbf006c63f03e57bc5b30120c026298", null ],
+    [ "unimplemented6", "union___r_e_g___i_o_c_o_n.html#a476121b3b3bc5ac9d560c9ecc7776dd2", null ],
+    [ "word", "union___r_e_g___i_o_c_o_n.html#a95eaf267278d90d2e6cd69c7d666b45e", null ],
+    [ "XcrSTBYEnable", "union___r_e_g___i_o_c_o_n.html#a8f4c5f2bd5e01e55b589e255f042a974", null ]
+];

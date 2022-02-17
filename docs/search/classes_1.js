@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['sensor_22',['Sensor',['../class_sensor.html',1,'']]]
+  ['canbus_0',['CANBus',['../class_c_a_n_bus.html',1,'']]],
+  ['canfd_1',['CANFD',['../class_c_a_n_f_d.html',1,'']]]
 ];
