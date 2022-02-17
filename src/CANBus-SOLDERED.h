@@ -20,6 +20,7 @@ class CANBus : public mcp2518fd
   public:
     CANBus(int _pin) : mcp2518fd(_pin)
     {
+    
     }
 };
 
