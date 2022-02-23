@@ -1,6 +1,31 @@
-// MCP2517/8 receive a CAN2.0 frame with Mask and Filter setting
+/**
+ **************************************************
+ *
+ * @file        CAN20_RECV_MASK_FILT.ino
+ * @brief       Example for receiving data through CAN
+ *              communication using CAN 2.0 protocol
+ *              with use of Mask and Filter setting
+ *
+ *              Product used is www.solde.red/333020
+ * 
+ *              Modified By Soldered
+ * 
+ * @authors     Longan Labs
+ ***************************************************/
 
-// Modified By Soldered for use with https://solde.red/333012
+//Connecting diagram
+//Breakout      Arduino
+//|-------------|
+//NCS-----------10
+//SDI-----------MOSI(11 on Dasduino Core)
+//SDO-----------MISO(12 on Dasduino Core)
+//SCK-----------SCK(13 on Dasduino Core)
+//GND-----------GND
+//VCC-----------5V
+//CLKO----------NOT CONNECTED
+//INT-----------2
+//INT0----------NOT CONNECTED
+//INT1----------NOT CONNECTED
 
 #include "CANBus-SOLDERED.h"
 
@@ -18,7 +43,7 @@ char str[20];
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(115200); //Begin serial communication with PC
     while (!Serial)
     {
     };
