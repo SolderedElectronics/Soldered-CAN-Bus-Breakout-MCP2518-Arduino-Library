@@ -1,27 +1,44 @@
-/*************************************************************************************************
-    OBD-II_PIDs TEST CODE
-    LOOVEE @ JUN24, 2017
+/**
+ **************************************************
+ *
+ * @file        OBDII-PIDs.ino
+ * @brief       Input a PID, then you will get reponse
+ *              from vehicle, the input should be end with '\n'
+ *                  Query
+ *                      send id: 0x7df
+ *                      dta: 0x02, 0x01, PID_CODE, 0, 0, 0, 0, 0
+ *
+ *                  Response
+ *                      From id: 0x7E9 or 0x7EA or 0x7EB
+ *                      dta: len, 0x41, PID_CODE, byte0, byte1(option), byte2(option), byte3(option), byte4(option)
+ *
+ *
+ *              Product used is www.solde.red/333020
+ * 
+ *              Modified By Soldered
+ * 
+ * @authors     Longan Labs
+ ***************************************************/
 
-    Query
-    send id: 0x7df
-      dta: 0x02, 0x01, PID_CODE, 0, 0, 0, 0, 0
-
-    Response
-    From id: 0x7E9 or 0x7EA or 0x7EB
-      dta: len, 0x41, PID_CODE, byte0, byte1(option), byte2(option), byte3(option), byte4(option)
-
-    https://en.wikipedia.org/wiki/OBD-II_PIDs
-
-    Modified By Soldered for use with https://solde.red/333012
-
-    Input a PID, then you will get reponse from vehicle, the input should be end with '\n'
-***************************************************************************************************/
+//Connecting diagram
+//Breakout      Arduino
+//|-------------|
+//NCS-----------10
+//SDI-----------MOSI(11 on Dasduino Core)
+//SDO-----------MISO(12 on Dasduino Core)
+//SCK-----------SCK(13 on Dasduino Core)
+//GND-----------GND
+//VCC-----------5V
+//CLKO----------NOT CONNECTED
+//INT-----------2
+//INT0----------NOT CONNECTED
+//INT1----------NOT CONNECTED
 
 #include "CANBus-SOLDERED.h"
 #include <SPI.h>
 
-// pin for CAN-FD Shield
-const int SPI_CS_PIN = 9;
+// Change according to your setup
+const int SPI_CS_PIN = 10;
 const int CAN_INT_PIN = 2;
 
 // pin for CANBed FD
@@ -69,13 +86,13 @@ void sendPid(unsigned char __pid)
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(115200); //Begin serial communication with PC
     while (!Serial)
     {
     };
 
-    while (CAN_OK != CAN.begin(CAN_125KBPS))
-    { // init can bus : baudrate = 125k
+    while (CAN_OK != CAN.begin(CAN_125KBPS)) // init can bus : baudrate = 125k
+    { 
         Serial.println("CAN init fail, retry...");
         delay(100);
     }
@@ -89,8 +106,8 @@ void loop()
     taskCanRecv();
     taskDbg();
 
-    if (getPid)
-    { // GET A PID
+    if (getPid) // GET A PID
+    { 
         getPid = 0;
         sendPid(PID_INPUT);
         PID_INPUT = 0;
@@ -146,5 +163,4 @@ void taskDbg()
         }
     }
 }
-
 // END FILE

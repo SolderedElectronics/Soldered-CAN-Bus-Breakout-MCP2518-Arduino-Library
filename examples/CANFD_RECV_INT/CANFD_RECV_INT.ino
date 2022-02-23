@@ -1,24 +1,31 @@
-/*  MCP2517/8 receive a CAN-FD frame with interrupt
+/**
+ **************************************************
+ *
+ * @file        CANFD_RECV_INT.ino
+ * @brief       Example for receiving frame through CAN
+ *              communication using CAN FD protocol and 
+ *              interrupt
+ *
+ *              Product used is www.solde.red/333020
+ * 
+ *              Modified By Soldered
+ * 
+ * @authors     Longan Labs
+ ***************************************************/
 
-    can-fd baud rate:
-
-    CAN_125K_500K
-    CAN_250K_500K
-    CAN_250K_750K
-    CAN_250K_1M
-    CAN_250K_1M5
-    CAN_250K_2M
-    CAN_250K_3M
-    CAN_250K_4M
-    CAN_500K_1M
-    CAN_500K_2M
-    CAN_500K_3M
-    CAN_500K_4M
-    CAN_1000K_4M
-
-    Modified By Soldered for use with https://solde.red/333012
-*/
-
+//Connecting diagram
+//Breakout      Arduino
+//|-------------|
+//NCS-----------10
+//SDI-----------MOSI(11 on Dasduino Core)
+//SDO-----------MISO(12 on Dasduino Core)
+//SCK-----------SCK(13 on Dasduino Core)
+//GND-----------GND
+//VCC-----------5V
+//CLKO----------NOT CONNECTED
+//INT-----------2
+//INT0----------NOT CONNECTED
+//INT1----------NOT CONNECTED
 
 #include "CANBus-SOLDERED.h"
 #include <SPI.h>
@@ -29,9 +36,9 @@
 // const int SPI_CS_PIN = 9;
 // const int CAN_INT_PIN = 2;
 
-// pin for CANBed FD
-const int SPI_CS_PIN = 17;
-const int CAN_INT_PIN = 7;
+// Change according to your setup
+const int SPI_CS_PIN = 10;
+const int CAN_INT_PIN = 2;
 
 CANBus CAN(SPI_CS_PIN); // Set CS pin
 
@@ -41,7 +48,7 @@ unsigned char buf[MAX_DATA_SIZE];
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(115200); //Begin serial communication with PC
     while (!Serial)
     {
         ; // wait for serial port to connect. Needed for native USB port only

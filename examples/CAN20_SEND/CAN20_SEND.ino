@@ -1,6 +1,30 @@
-// MCP2517/8 send a CAN frame
+/**
+ **************************************************
+ *
+ * @file        CAN20_SEND_INT.ino
+ * @brief       Example for sending frame through CAN
+ *              communication using CAN 2.0 protocol
+ *
+ *              Product used is www.solde.red/333020
+ * 
+ *              Modified By Soldered
+ * 
+ * @authors     Longan Labs
+ ***************************************************/
 
-// Modified By Soldered for use with https://solde.red/333012
+//Connecting diagram
+//Breakout      Arduino
+//|-------------|
+//NCS-----------10
+//SDI-----------MOSI(11 on Dasduino Core)
+//SDO-----------MISO(12 on Dasduino Core)
+//SCK-----------SCK(13 on Dasduino Core)
+//GND-----------GND
+//VCC-----------5V
+//CLKO----------NOT CONNECTED
+//INT-----------2
+//INT0----------NOT CONNECTED
+//INT1----------NOT CONNECTED
 
 #include "CANBus-SOLDERED.h"
 
@@ -13,7 +37,7 @@ CANBus CAN(SPI_CS_PIN); // Set CS pin
 void setup()
 {
     // Initialize USB
-    Serial.begin(115200);
+    Serial.begin(115200); //Begin serial communication with PC
     while (!Serial)
     {
     };

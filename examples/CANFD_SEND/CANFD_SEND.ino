@@ -1,31 +1,39 @@
-/*  MCP2517/8 send a can fd frame
+/**
+ **************************************************
+ *
+ * @file        CANFD_RECV_INT.ino
+ * @brief       Example for sending frame through CAN
+ *              communication using CAN FD protocol
+ *
+ *              Product used is www.solde.red/333020
+ * 
+ *              Modified By Soldered
+ * 
+ * @authors     Longan Labs
+ ***************************************************/
 
-    can-fd baud rate:
+//Connecting diagram
+//Breakout      Arduino
+//|-------------|
+//NCS-----------10
+//SDI-----------MOSI(11 on Dasduino Core)
+//SDO-----------MISO(12 on Dasduino Core)
+//SCK-----------SCK(13 on Dasduino Core)
+//GND-----------GND
+//VCC-----------5V
+//CLKO----------NOT CONNECTED
+//INT-----------2
+//INT0----------NOT CONNECTED
+//INT1----------NOT CONNECTED
 
-    CAN_125K_500K
-    CAN_250K_500K
-    CAN_250K_750K
-    CAN_250K_1M
-    CAN_250K_1M5
-    CAN_250K_2M
-    CAN_250K_3M
-    CAN_250K_4M
-    CAN_500K_1M
-    CAN_500K_2M
-    CAN_500K_3M
-    CAN_500K_4M
-    CAN_1000K_4M
-
-    Modified By Soldered for use with https://solde.red/333012
-*/
 
 #include "CANBus-SOLDERED.h"
 #include <SPI.h>
 
 #define MAX_DATA_SIZE 64
 
-// pin for CAN-FD Shield
-const int SPI_CS_PIN = 9;
+// Change according to your setup
+const int SPI_CS_PIN = 10;
 const int CAN_INT_PIN = 2;
 
 // pin for CANBed FD
@@ -39,7 +47,7 @@ unsigned char stmp[MAX_DATA_SIZE] = {0};
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(115200); //Begin serial communication with PC
     while (!Serial)
     {
     }
