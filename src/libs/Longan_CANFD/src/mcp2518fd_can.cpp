@@ -50,11 +50,13 @@ uint16_t DRV_CANFDSPI_CalculateCRC16(uint8_t *data, uint16_t size) {
   return init;
 }
 
-
-/*********************************************************************************************************
-** Function name:           begin
-** Descriptions:            init can and set speed
-*********************************************************************************************************/
+/**
+ * @brief                   Init can and set speed
+ *
+ * @param speedset    -     Data transmission rate
+ * 
+ * @param clockset    -     Frequency set
+ */
 byte mcp2518fd::begin(uint32_t speedset, const byte clockset) {
   SPI.begin();
 
@@ -65,10 +67,11 @@ byte mcp2518fd::begin(uint32_t speedset, const byte clockset) {
   return res;
 }
 
-/*********************************************************************************************************
-** Function name:           mcp2518fd_reset
-** Descriptions:            reset the device
-*********************************************************************************************************/
+/**
+ * @brief                   Resets device
+ *
+ * @return                  returns SPI transmission ok or not
+ */
 int8_t mcp2518fd::mcp2518fd_reset(void) {
   int8_t spiTransferError = 0;
 
@@ -91,6 +94,13 @@ int8_t mcp2518fd::mcp2518fd_reset(void) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Reads byte from breakout board
+ *
+ * @param address -         Address of byte to read
+ * 
+ * @param *rxd -            Buffer to receive data in
+ */
 int8_t mcp2518fd::mcp2518fd_ReadByte(uint16_t address, uint8_t *rxd) {
   int8_t spiTransferError = 0;
 
@@ -124,6 +134,13 @@ int8_t mcp2518fd::mcp2518fd_ReadByte(uint16_t address, uint8_t *rxd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Writes byte to breakout board
+ *
+ * @param address -         Address of byte to write
+ * 
+ * @param txd -             Byte to write
+ */
 int8_t mcp2518fd::mcp2518fd_WriteByte(uint16_t address, uint8_t txd) {
   int8_t spiTransferError = 0;
 
@@ -148,6 +165,13 @@ int8_t mcp2518fd::mcp2518fd_WriteByte(uint16_t address, uint8_t txd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Reads 32 bit word from breakout board
+ *
+ * @param address -         Address of word to read
+ * 
+ * @param *rxd -            Buffer to receive data in
+ */
 int8_t mcp2518fd::mcp2518fd_ReadWord(uint16_t address, uint32_t *rxd) {
   uint8_t i;
   uint32_t x;
@@ -182,6 +206,13 @@ int8_t mcp2518fd::mcp2518fd_ReadWord(uint16_t address, uint32_t *rxd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Writes 32 bit word to breakout board
+ *
+ * @param address -         Address of word to write
+ * 
+ * @param txd -             Byte to write
+ */
 int8_t mcp2518fd::mcp2518fd_WriteWord(uint16_t address, uint32_t txd) {
   uint8_t i;
   int8_t spiTransferError = 0;
@@ -214,6 +245,13 @@ int8_t mcp2518fd::mcp2518fd_WriteWord(uint16_t address, uint32_t txd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Reads 16 bit word from breakout board
+ *
+ * @param address -         Address of word to read
+ * 
+ * @param *rxd -            Buffer to receive data in
+ */
 int8_t mcp2518fd::mcp2518fd_ReadHalfWord(uint16_t address, uint16_t *rxd) {
   uint8_t i;
   uint32_t x;
@@ -248,6 +286,13 @@ int8_t mcp2518fd::mcp2518fd_ReadHalfWord(uint16_t address, uint16_t *rxd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Writes 16 bit word to breakout board
+ *
+ * @param address -         Address of word to write
+ * 
+ * @param txd -             Byte to write
+ */
 int8_t mcp2518fd::mcp2518fd_WriteHalfWord(uint16_t address, uint16_t txd) {
   uint8_t i;
   int8_t spiTransferError = 0;
@@ -278,6 +323,15 @@ int8_t mcp2518fd::mcp2518fd_WriteHalfWord(uint16_t address, uint16_t txd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Reads n bytes from breakout board
+ *
+ * @param address -         Address of first byte to read
+ * 
+ * @param *rxd -            Buffer to receive data in
+ * 
+ * @param nBytes   -        number of bytes to read
+ */
 int8_t mcp2518fd::mcp2518fd_ReadByteArray(uint16_t address, uint8_t *rxd,
                                           uint16_t nBytes) {
   uint16_t i;
@@ -316,6 +370,15 @@ int8_t mcp2518fd::mcp2518fd_ReadByteArray(uint16_t address, uint8_t *rxd,
   return spiTransferError;
 }
 
+/**
+ * @brief                   Writes n bytes to breakout board
+ *
+ * @param address -         Address of first byte to write
+ * 
+ * @param *txd -            Buffer with data to be sent
+ * 
+ * @param nBytes   -        number of bytes to write
+ */
 int8_t mcp2518fd::mcp2518fd_WriteByteArray(uint16_t address, uint8_t *txd,
                                            uint16_t nBytes) {
   uint16_t i;
@@ -348,6 +411,13 @@ int8_t mcp2518fd::mcp2518fd_WriteByteArray(uint16_t address, uint8_t *txd,
   return spiTransferError;
 }
 
+/**
+ * @brief                   Writes byte to breakout board with CRC method
+ *
+ * @param address -         Address of byte to write
+ * 
+ * @param txd -             Byte to write
+ */
 int8_t mcp2518fd::mcp2518fd_WriteByteSafe(uint16_t address, uint8_t txd) {
   uint16_t crcResult = 0;
   int8_t spiTransferError = 0;
@@ -380,6 +450,13 @@ int8_t mcp2518fd::mcp2518fd_WriteByteSafe(uint16_t address, uint8_t txd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Writes 32 bit word to breakout board with CRC method
+ *
+ * @param address -         Address of word to write
+ * 
+ * @param txd -             Word to write
+ */
 int8_t mcp2518fd::mcp2518fd_WriteWordSafe(uint16_t address, uint32_t txd) {
   uint8_t i;
   uint16_t crcResult = 0;
@@ -420,6 +497,19 @@ int8_t mcp2518fd::mcp2518fd_WriteWordSafe(uint16_t address, uint32_t txd) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Reads byteS from breakout board with CRC method
+ *
+ * @param address -         Address of first byte to read
+ * 
+ * @param *rxd -             Buffer to store bytes
+ * 
+ * @param nBytes -          Number of bytes to read
+ * 
+ * @param fromRam -         
+ * 
+ * @param *crcIsCorrect  -  Variable containig feedback about CRC   
+ */
 int8_t mcp2518fd::mcp2518fd_ReadByteArrayWithCRC(uint16_t address, uint8_t *rxd,
                                                  uint16_t nBytes, bool fromRam,
                                                  bool *crcIsCorrect) {
@@ -483,6 +573,17 @@ int8_t mcp2518fd::mcp2518fd_ReadByteArrayWithCRC(uint16_t address, uint8_t *rxd,
   return spiTransferError;
 }
 
+/**
+ * @brief                   Write bytes to breakout board with CRC method
+ *
+ * @param address -         Address of first byte to write
+ * 
+ * @param *txd -            Bytes to write
+ * 
+ * @param nBytes -          Number of bytes to write
+ * 
+ * @param fromRam -         
+ */
 int8_t mcp2518fd::mcp2518fd_WriteByteArrayWithCRC(uint16_t address,
                                                   uint8_t *txd, uint16_t nBytes,
                                                   bool fromRam) {
@@ -527,6 +628,15 @@ int8_t mcp2518fd::mcp2518fd_WriteByteArrayWithCRC(uint16_t address,
   return spiTransferError;
 }
 
+/**
+ * @brief                   Read 32 bit words from breakout board
+ *
+ * @param address -         Address of first word to read
+ * 
+ * @param *rxd -            buffer to store read bytes
+ * 
+ * @param nWords -          Number of words to read      
+ */
 int8_t mcp2518fd::mcp2518fd_ReadWordArray(uint16_t address, uint32_t *rxd,
                                           uint16_t nWords) {
   uint16_t i, j, n;
@@ -569,6 +679,15 @@ int8_t mcp2518fd::mcp2518fd_ReadWordArray(uint16_t address, uint32_t *rxd,
   return spiTransferError;
 }
 
+/**
+ * @brief                   Write 32 bit words to breakout board
+ *
+ * @param address -         Address of first word to write
+ * 
+ * @param *txd -            Words to write
+ * 
+ * @param nWords -          Number of words to write      
+ */
 int8_t mcp2518fd::mcp2518fd_WriteWordArray(uint16_t address, uint32_t *txd,
                                            uint16_t nWords) {
   uint16_t i, j, n;
@@ -606,6 +725,10 @@ int8_t mcp2518fd::mcp2518fd_WriteWordArray(uint16_t address, uint32_t *txd,
   return spiTransferError;
 }
 
+/**
+ * @brief                   Enable error correcting code
+ * 
+ */
 int8_t mcp2518fd::mcp2518fd_EccEnable() {
   int8_t spiTransferError = 0;
   uint8_t d = 0;
@@ -627,6 +750,10 @@ int8_t mcp2518fd::mcp2518fd_EccEnable() {
   return 0;
 }
 
+/**
+ * @brief                   Initialize RAM
+ * 
+ */
 int8_t mcp2518fd::mcp2518fd_RamInit(uint8_t d) {
   uint8_t txd[SPI_DEFAULT_BUFFER_LENGTH];
   uint32_t k;
@@ -650,6 +777,10 @@ int8_t mcp2518fd::mcp2518fd_RamInit(uint8_t d) {
   return spiTransferError;
 }
 
+/**
+ * @brief                   Configure object reset
+ * 
+ */
 int8_t mcp2518fd::mcp2518fd_ConfigureObjectReset(CAN_CONFIG *config) {
   REG_CiCON ciCon;
   ciCon.word = canControlResetValues[cREGADDR_CiCON / 4];
@@ -670,6 +801,11 @@ int8_t mcp2518fd::mcp2518fd_ConfigureObjectReset(CAN_CONFIG *config) {
   return 0;
 }
 
+/**
+ * @brief                   Sets all configuration data from CAN_CONFIG structure
+ * 
+ * @param *config           Structure containig config data
+ */
 int8_t mcp2518fd::mcp2518fd_Configure(CAN_CONFIG *config) {
   REG_CiCON ciCon;
   int8_t spiTransferError = 0;
@@ -846,6 +982,10 @@ static const uint16_t MAX_DATA_PHASE_SEGMENT_1 = 32 ;
 static const uint8_t  MAX_DATA_PHASE_SEGMENT_2 = 16 ;
 static const uint8_t  MAX_DATA_SJW             = 16 ;
 
+/**
+ * @brief                   Bittime calculation
+ * 
+ */
 int mcp2518fd::calcBittime(const uint32_t inDesiredArbitrationBitRate,
                            const uint32_t inTolerancePPM)
 {
@@ -2202,16 +2342,12 @@ byte mcp2518fd::sendMsgBuf(unsigned long id, byte ext, byte rtr, byte len,
   return mcp2518fd_sendMsg(buf, len, id, ext, rtr, wait_sent);
 }
 
-/*********************************************************************************************************
-** Function name:           readRxTxStatus
-** Descriptions:            Read RX and TX interrupt bits. Function uses status
-*reading, but translates.
-**                          result to MCP_CANINTF. With this you can check
-*status e.g. on interrupt sr
-**                          with one single call to save SPI calls. Then use
-*checkClearRxStatus and
-**                          checkClearTxStatus for testing.
-*********************************************************************************************************/
+/**
+ * @brief                   Read RX and TX interrupt bits. Function uses status
+ *reading, but translates.     
+ * 
+ * @return                  RX and TX interrupt bits.
+ */
 byte mcp2518fd::readRxTxStatus(void) {
   byte ret;
   mcp2518fd_ReceiveChannelEventGet(APP_RX_FIFO, &rxFlags);
@@ -2219,36 +2355,42 @@ byte mcp2518fd::readRxTxStatus(void) {
   return ret;
 }
 
-/*********************************************************************************************************
-** Function name:           checkClearRxStatus
-** Descriptions:            Return first found rx CANINTF status and clears it
+/**
+ * @brief                   Return first found rx CANINTF status and clears it
+ *from parameter.
+ * 
+ * @param *status     -          
+ * 
+ * @return                  Return first found rx CANINTF status and clears it
 *from parameter.
-**                          Note that this does not affect to chip CANINTF at
-*all. You can use this
-**                          with one single readRxTxStatus call.
-*********************************************************************************************************/
+ */
 byte mcp2518fd::checkClearRxStatus(byte *status) {
   return 1;
 }
 
-/*********************************************************************************************************
-** Function name:           checkClearTxStatus
-** Descriptions:            Return specified buffer of first found tx CANINTF
-*status and clears it from parameter.
-**                          Note that this does not affect to chip CANINTF at
-*all. You can use this
-**                          with one single readRxTxStatus call.
-*********************************************************************************************************/
+/**
+ * @brief                   Return specified buffer of first found tx CANINTF
+ *status and clears it from parameter.
+ * 
+ * @param *status     -         
+ * 
+ * @param iTxBuf     -         
+ * 
+ * @return                  Return specified buffer of first found tx CANINTF
+ *status and clears it from parameter.
+ */
 byte mcp2518fd::checkClearTxStatus(byte *status, byte iTxBuf) {
   (void)iTxBuf;
   return 1;
 }
 
-/*********************************************************************************************************
-** Function name:           mcpPinMode
-** Descriptions:            switch supported pins between HiZ, interrupt, output
-*or input
-*********************************************************************************************************/
+/**
+ * @brief                   switch supported pins between HiZ, interrupt, output
+ * 
+ * @param pin     -         Pin to modify
+ * 
+ * @return                  SPI transfer error
+ */
 bool mcp2518fd::mcpPinMode(const byte pin, const byte mode) {
   int8_t spiTransferError = 1;
 
@@ -2273,10 +2415,13 @@ bool mcp2518fd::mcpPinMode(const byte pin, const byte mode) {
   return spiTransferError;
 }
 
-/*********************************************************************************************************
-** Function name:           mcpDigitalWrite
-** Descriptions:            write HIGH or LOW to RX0BF/RX1BF
-*********************************************************************************************************/
+/**
+ * @brief                   write HIGH or LOW from supported pins
+ * 
+ * @param pin     -         Pin to modify
+ * 
+ * @return                  SPI transfer error
+ */
 bool mcp2518fd::mcpDigitalWrite(const byte pin, const byte mode) {
   int8_t spiTransferError = 0;
 
@@ -2312,10 +2457,13 @@ bool mcp2518fd::mcpDigitalWrite(const byte pin, const byte mode) {
   return spiTransferError;
 }
 
-/*********************************************************************************************************
-** Function name:           mcpDigitalRead
-** Descriptions:            read HIGH or LOW from supported pins
-*********************************************************************************************************/
+/**
+ * @brief                   read HIGH or LOW from supported pins
+ * 
+ * @param pin     -         Pin to read
+ * 
+ * @return                  state
+ */
 byte mcp2518fd::mcpDigitalRead(const byte pin) {
   GPIO_PIN_STATE state;
 
@@ -2341,7 +2489,13 @@ byte mcp2518fd::mcpDigitalRead(const byte pin) {
   return (byte)state;;
 }
 
-/* CANFD Auxiliary helper */
+/**
+ * @brief                   Convert Data Lenght Code to lenght
+ * 
+ * @param len     -         Data Lenght Code
+ * 
+ * @return                  Lenght
+ */
 byte CANFD::dlc2len(byte dlc) {
   if (dlc <= CAN_DLC_8)
     return dlc;
@@ -2357,6 +2511,13 @@ byte CANFD::dlc2len(byte dlc) {
   }
 }
 
+/**
+ * @brief                   Convert lenght to Data Lenght Code
+ * 
+ * @param len     -         Lenght in bits
+ * 
+ * @return                  Data Lenght Code
+ */
 byte CANFD::len2dlc(byte len) {
   if (len <= CAN_DLC_8)
     return len;
