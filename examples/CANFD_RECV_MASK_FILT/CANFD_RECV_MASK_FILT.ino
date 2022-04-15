@@ -1,16 +1,16 @@
 /**
  **************************************************
- *
- * @file        CANFD_RECV_MASK_FILT.ino
- * @brief       Example for receiving frame through CAN
- *              communication using CAN FD protocol and 
- *              Mask and Filtering setting
- *
- *              Product used is www.solde.red/333020
- * 
- *              Modified By Soldered
- * 
- * @authors     Longan Labs
+
+   @file        CANFD_RECV_MASK_FILT.ino
+   @brief       Example for receiving frame through CAN
+                communication using CAN FD protocol and
+                Mask and Filtering setting
+
+                Product used is www.solde.red/333020
+
+                Modified By Soldered
+
+   @authors     Longan Labs
  ***************************************************/
 
 //Connecting diagram
@@ -38,63 +38,56 @@
 
 // Change according to your setup
 const int SPI_CS_PIN = 10;
-const int CAN_INT_PIN = 2;
 
 CANBus CAN(SPI_CS_PIN); // Set CS pin
 
-unsigned char flagRecv = 0;
-unsigned char len = 0;
-unsigned char buf[MAX_DATA_SIZE];
+unsigned char len = 0; // Variable to store length of incoming data
+unsigned char buf[MAX_DATA_SIZE]; // Buffer to store incoming data
 
 void setup()
 {
-    Serial.begin(115200); //Begin serial communication with PC
-    while (!Serial)
-    {
-        ; // wait for serial port to connect. Needed for native USB port only
-    }
+  Serial.begin(115200); //Begin serial communication with PC
+  while (0 != CAN.begin(CAN_125K_500K))// Initialize CAN BUS with baud rate of 125 kbps and arbitration rate of 500k
+    // This should be in while loop because MCP2518
+    // needs some time to initialize and start function
+    // properly.
+  {
+    Serial.println("CAN init fail, retry..."); // Print information message
+    delay(100);
+  }
+  Serial.println("CAN init ok!");
 
-    CAN.setMode(CAN_NORMAL_MODE);
+  // set mask and filter, there are 32 mask/filter for MCP2517/8FD, 0-31
 
-    // init can bus : arbitration bitrate = 500k, data bitrate = 1M
-    while (0 != CAN.begin(CAN_125K_500K))
-    {
-        Serial.println("CAN init fail, retry...");
-        delay(100);
-    }
-    Serial.println("CAN init ok!");
+  int filtn = 0;     // 0~31, 32 mask and filter
+  int ext = 0;       // 0: standard frame, 1: ext frame
+  int filter = 0x04; // Set filter to receive from  transmitter with that ID
+  int mask = 0x7ff;  // Receive only bit that are 1 in mask
 
-    // set mask and filter, there are 32 mask/filter for MCP2517/8FD, 0-31
-
-    int filtn = 0;     // 0~31, 32 mask and filter
-    int ext = 0;       // 0: standard frame, 1: ext frame
-    int filter = 0x04; // filter
-    int mask = 0x7ff;  // mask
-
-    CAN.init_Filt_Mask(filtn, ext, 0x04, 0x7ff);
+  CAN.init_Filt_Mask(filtn, ext, 0x04, 0x7ff); // Set mask and filter
 }
 
 
 void loop()
 {
+  if (CAN_MSGAVAIL == CAN.checkReceive()) // Check if data coming
+  {
 
-    if (CAN_MSGAVAIL == CAN.checkReceive())
+    CAN.readMsgBuf(&len, buf);  // You should call readMsgBuff before getCanId
+    // This function saves incoming data into buffer buf
+    // It saves len number of bytes
+    unsigned long id = CAN.getCanId(); // Get ID of transmitter
+    Serial.print("Get Data From id: "); // Print ifnormatio message
+    Serial.println(id); // Print ID of transmitter
+    Serial.print("Len = ");
+    Serial.println(len);// Print length of the data
+    for (int i = 0; i < len; i++)
     {
-        CAN.readMsgBuf(&len, buf); // You should call readMsgBuff before getCanId
-        unsigned long id = CAN.getCanId();
-
-        Serial.print("Get Data From id: ");
-        Serial.println(id);
-        Serial.print("Len = ");
-        Serial.println(len);
-        // print the data
-        for (int i = 0; i < len; i++)
-        {
-            Serial.print(buf[i]);
-            Serial.print("\t");
-        }
-        Serial.println();
+      Serial.print(buf[i]); // Print array with received data
+      Serial.print("\t"); // Print tabulator to format printing
     }
+    Serial.println(); // Print new line at the end
+  }
 }
 
 // END FILE
