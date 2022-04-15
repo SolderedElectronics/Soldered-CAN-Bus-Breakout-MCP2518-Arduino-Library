@@ -1,16 +1,16 @@
 /**
  **************************************************
- *
- * @file        CANFD_RECV_INT.ino
- * @brief       Example for receiving frame through CAN
- *              communication using CAN FD protocol and 
- *              interrupt
- *
- *              Product used is www.solde.red/333020
- * 
- *              Modified By Soldered
- * 
- * @authors     Longan Labs
+
+   @file        CANFD_RECV_INT.ino
+   @brief       Example for receiving frame through CAN
+                communication using CAN FD protocol and
+                interrupt
+
+                Product used is www.solde.red/333020
+
+                Modified By Soldered
+
+   @authors     Longan Labs
  ***************************************************/
 
 //Connecting diagram
@@ -42,57 +42,56 @@ const int CAN_INT_PIN = 2;
 
 CANBus CAN(SPI_CS_PIN); // Set CS pin
 
-unsigned char flagRecv = 0;
-unsigned char len = 0;
-unsigned char buf[MAX_DATA_SIZE];
+unsigned char flagRecv = 0;// Flag which indicates if chip received data
+unsigned char len = 0; // Length of data
+unsigned char buf[MAX_DATA_SIZE]; // Buffer to store data
 
 void setup()
 {
-    Serial.begin(115200); //Begin serial communication with PC
-    while (!Serial)
-    {
-        ; // wait for serial port to connect. Needed for native USB port only
-    }
-    attachInterrupt(digitalPinToInterrupt(CAN_INT_PIN), CAN_ISR, FALLING); // start interrupt
-    CAN.setMode(CAN_NORMAL_MODE);
+  Serial.begin(115200); //Begin serial communication with PC
 
-    // init can bus : arbitration bitrate = 125k, data bitrate = 500k
-    while (0 != CAN.begin(CAN_125K_500K))
-    {
-        Serial.println("CAN init fail, retry...");
-        delay(100);
-    }
-    Serial.println("CAN init ok!");
+  while (0 != CAN.begin(CAN_125K_500K))// Initialize CAN BUS with baud rate of 125 kbps and arbitration rate of 500k
+    // This should be in while loop because MCP2518
+    // needs some time to initialize and start function
+    // properly.
+  {
+    Serial.println("CAN init fail, retry..."); // Print information message
+    delay(100);
+  }
+  Serial.println("CAN init ok!");
+
+  attachInterrupt(digitalPinToInterrupt(CAN_INT_PIN), CAN_ISR, FALLING); // Set interrupt on pin CAN_INT_PIN
+  // and call ISR CAN_ISR, fire interrupt on falling edge
 }
 
+// Should be as fast as possible, otherwise might crash
 void CAN_ISR()
 {
-    flagRecv = 1;
+  flagRecv = 1; // If data is received, interrupt will fire, and this flag will be set to 1
 }
 
 void loop()
 {
 
-    if (flagRecv)
+  if (flagRecv)
+  {
+
+    flagRecv = 0;              // Clear flag
+    CAN.readMsgBuf(&len, buf);  // You should call readMsgBuff before getCanId
+    // This function saves incoming data into buffer buf
+    // It saves len number of bytes
+    unsigned long id = CAN.getCanId(); // Get ID of transmitter
+    Serial.print("Get Data From id: "); // Print ifnormatio message
+    Serial.println(id); // Print ID of transmitter
+    Serial.print("Len = ");
+    Serial.println(len);// Print length of the data
+    for (int i = 0; i < len; i++)
     {
-
-        flagRecv = 0; // check if get data
-
-        CAN.readMsgBuf(&len, buf); // You should call readMsgBuff before getCanId
-        unsigned long id = CAN.getCanId();
-
-        Serial.print("Get Data From id: ");
-        Serial.println(id);
-        Serial.print("Len = ");
-        Serial.println(len);
-        // print the data
-        for (int i = 0; i < len; i++)
-        {
-            Serial.print(buf[i]);
-            Serial.print("\t");
-        }
-        Serial.println();
+      Serial.print(buf[i]); // Print array with received data
+      Serial.print("\t"); // Print tabulator to format printing
     }
+    Serial.println(); // Print new line at the end
+  }
 }
 
 // END FILE

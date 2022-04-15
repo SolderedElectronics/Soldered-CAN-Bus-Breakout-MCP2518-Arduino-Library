@@ -1,15 +1,15 @@
 /**
  **************************************************
- *
- * @file        CANFD_RECV_INT.ino
- * @brief       Example for sending frame through CAN
- *              communication using CAN FD protocol
- *
- *              Product used is www.solde.red/333020
- * 
- *              Modified By Soldered
- * 
- * @authors     Longan Labs
+
+   @file        CANFD_RECV_INT.ino
+   @brief       Example for sending frame through CAN
+                communication using CAN FD protocol
+
+                Product used is www.solde.red/333020
+
+                Modified By Soldered
+
+   @authors     Longan Labs
  ***************************************************/
 
 //Connecting diagram
@@ -34,7 +34,6 @@
 
 // Change according to your setup
 const int SPI_CS_PIN = 10;
-const int CAN_INT_PIN = 2;
 
 // pin for CANBed FD
 // const int SPI_CS_PIN = 17;
@@ -42,45 +41,44 @@ const int CAN_INT_PIN = 2;
 
 CANBus CAN(SPI_CS_PIN); // Set CS pin
 
-unsigned char stmp[MAX_DATA_SIZE] = {0};
-
+unsigned char stmp[MAX_DATA_SIZE] = {0}; // Buffer which stores data to send
 
 void setup()
 {
-    Serial.begin(115200); //Begin serial communication with PC
-    while (!Serial)
-    {
-    }
+  Serial.begin(115200); //Begin serial communication with PC
 
-    CAN.setMode(CAN_NORMAL_MODE);
+  while (0 != CAN.begin(CAN_125K_500K))// Initialize CAN BUS with baud rate of 125 kbps and arbitration rate of 500k
+    // This should be in while loop because MCP2518
+    // needs some time to initialize and start function
+    // properly.
+  {
+    Serial.println("CAN init fail, retry..."); // Print information message
+    delay(100);
+  }
+  Serial.println("CAN init ok!");
 
-    // init can bus : arbitration bitrate = 125k, data bitrate = 500k
-    while (0 != CAN.begin(CAN_125K_500K))
-    {
-        Serial.println("CAN init fail, retry...");
-        delay(100);
-    }
-    Serial.println("CAN init ok!");
-
-    byte mode = CAN.getMode();
-    Serial.print("CAN mode = ");
-    Serial.println(mode);
-
-    for (int i = 0; i < MAX_DATA_SIZE; i++)
-    {
-        stmp[i] = i;
-    }
+  for (int i = 0; i < MAX_DATA_SIZE; i++) // Fill buffer with ascending numbers 
+  {
+    stmp[i] = i;
+  }
 }
 
 
 void loop()
 {
-    // send data:  id = 0x00, standrad frame, data len = 64, stmp: data buf
-    CAN.sendMsgBuf(0x01, 0, CANFD::len2dlc(MAX_DATA_SIZE), stmp);
-    delay(10);
-    CAN.sendMsgBuf(0x04, 0, CANFD::len2dlc(MAX_DATA_SIZE), stmp);
-    delay(500); // send data per 100ms
-    Serial.println("CAN BUS sendMsgBuf ok!");
+  CAN.sendMsgBuf(0x01, 0, CANFD::len2dlc(MAX_DATA_SIZE), stmp); // Send data in CAN network
+  // First parameter - which ID to set in frame (ID of transmitter)
+  // Second parameter - Frame size (0 - Normal frame, 1 - Extended frame)
+  // Third parameter - Length of buffer in bytes, but converted in Data Length Code
+  // Fourth parameter - Buffer which contains data to send
+  delay(10); // Wait a bit for CAN module to send data
+  CAN.sendMsgBuf(0x04, 0, CANFD::len2dlc(MAX_DATA_SIZE), stmp); // Send data in CAN network
+  // First parameter - which ID to set in frame (ID of transmitter)
+  // Second parameter - Frame size (0 - Normal frame, 1 - Extended frame)
+  // Third parameter - Length of buffer in bytes, but converted in Data Length Code
+  // Fourth parameter - Buffer which contains data to send
+  delay(500); // Wait a bit not to overfill network
+  Serial.println("CAN BUS sendMsgBuf ok!"); // Print message
 }
 
 // END FILE
