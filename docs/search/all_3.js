@@ -1,7 +1,7 @@
 var searchData=
 [
   ['calcbittime_0',['calcBittime',['../classmcp2518fd.html#a5340fc84b930e242092ed3dcb180dbbe',1,'mcp2518fd']]],
-  ['can_20bus_20breakout_20arduino_20library_20by_20soldered_1',['Can Bus Breakout Arduino library by Soldered',['../index.html',1,'']]],
+  ['can_20transceiver_20mcp2518_20board_20arduino_20library_1',['CAN Transceiver MCP2518 board Arduino library',['../index.html',1,'']]],
   ['can_5f1000k_5f4m_2',['CAN_1000K_4M',['../mcp2518fd__can__dfs_8h.html#aa71fa110986c71ccbaac2d0e2e62946b',1,'mcp2518fd_can_dfs.h']]],
   ['can_5f1000k_5f8m_3',['CAN_1000K_8M',['../mcp2518fd__can__dfs_8h.html#ad921097d5670914d41a14f34033bd12e',1,'mcp2518fd_can_dfs.h']]],
   ['can_5f1000kbps_4',['CAN_1000KBPS',['../mcp__can__fd_8h.html#a3ad450fa9b74c8d9fc57d81124acf08ca594aba579ffe9417f4a66b120f4023ed',1,'mcp_can_fd.h']]],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['can_20bus_20breakout_20arduino_20library_20by_20soldered_0',['Can Bus Breakout Arduino library by Soldered',['../index.html',1,'']]]
+  ['can_20transceiver_20mcp2518_20board_20arduino_20library_0',['CAN Transceiver MCP2518 board Arduino library',['../index.html',1,'']]]
 ];
