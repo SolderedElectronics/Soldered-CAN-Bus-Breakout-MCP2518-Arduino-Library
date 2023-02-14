@@ -25,9 +25,7 @@
 var NAVTREE =
 [
   [ "CAN Bus Soldered Arduino Library", "index.html", [
-    [ "CAN Transceiver MCP2518 board Arduino library", "index.html", [
-      [ "Have fun!", "index.html#autotoc_md8", null ]
-    ] ],
+    [ "CAN Transceiver MCP2518 board Arduino library", "index.html", "index" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
