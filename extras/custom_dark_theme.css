@@ -440,5 +440,10 @@ h3.glow,
 h4.glow,
 h5.glow,
 h6.glow {
-    text-shadow: 0 0 15px #25BAA8;
+          text-shadow: 0 0 15px #25BAA8;
 }
+#titlearea {
+      background-color: #000000;
+ }
+
+
