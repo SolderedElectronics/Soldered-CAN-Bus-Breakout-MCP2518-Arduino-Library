@@ -6,7 +6,7 @@
 
 | ![CAN Transceiver MCP2518 board](https://github.com/SolderedElectronics/CAN-Transceiver-MCP2518-board-hardware-design/blob/main/OUTPUTS/V1.1.1/333020.jpg) |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                               [CAN Transceiver MCP2518 board](https://www.solde.red/333020)                                                |
+|                                               [CAN Transceiver MCP2518 board](https://solde.red/333020)                                                |
 
 Controller Area Network (CAN) is a network technology that enables fast communication between microcontrollers, and is the most commonly used standard in cars. Our CAN breakout uses an MCP2518FD CAN whose communication between microcontrollers takes place on SPI protocol. In addition there is a CAN transceiver. This breakout allows use of both standards (CAN 2.0B and CAN Flexible Data (FD)). Access to the CAN bus is possible via CANH and CANL pins on the screw terminal. The 120ohm terminator resistor is also located on the board and can be connected to a jumper.
 
