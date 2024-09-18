@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['_5f_5fsetmode_0',['__setMode',['../class_m_c_p___c_a_n.html#a225a5f820e2a5e0e229538120bd980d7',1,'MCP_CAN::__setMode()'],['../classmcp2518fd.html#af4b85c85b303be9d6deff1006e3a052e',1,'mcp2518fd::__setMode()']]],
+  ['_5f_5fsetmode_0',['__setMode',['../classmcp2518fd.html#af4b85c85b303be9d6deff1006e3a052e',1,'mcp2518fd::__setMode()'],['../class_m_c_p___c_a_n.html#a225a5f820e2a5e0e229538120bd980d7',1,'MCP_CAN::__setMode()']]],
   ['_5fcan_5fbus_5fdiag_5fflags_1',['_CAN_BUS_DIAG_FLAGS',['../struct___c_a_n___b_u_s___d_i_a_g___f_l_a_g_s.html',1,'']]],
   ['_5fcan_5fbus_5fdiagnostic_2',['_CAN_BUS_DIAGNOSTIC',['../union___c_a_n___b_u_s___d_i_a_g_n_o_s_t_i_c.html',1,'']]],
   ['_5fcan_5fbus_5ferror_5fcount_3',['_CAN_BUS_ERROR_COUNT',['../struct___c_a_n___b_u_s___e_r_r_o_r___c_o_u_n_t.html',1,'']]],

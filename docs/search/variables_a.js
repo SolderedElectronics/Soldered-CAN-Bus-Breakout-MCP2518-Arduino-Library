@@ -13,7 +13,7 @@ var searchData=
   ['max_5fdata_5fsjw_10',['MAX_DATA_SJW',['../mcp2518fd__can_8cpp.html#a5613b00e8f4a77ff78fc05d3c168c872',1,'mcp2518fd_can.cpp']]],
   ['mbitrateprescaler_11',['mBitRatePrescaler',['../classmcp2518fd.html#a34a8ed8473ac117aec07d190111f7b3f',1,'mcp2518fd']]],
   ['mcp25xxfdcontrolresetvalues_12',['mcp25xxfdControlResetValues',['../mcp2518fd__can__dfs_8h.html#a2694d15400cc1e8ee43aa46dcc4a038b',1,'mcp2518fd_can_dfs.h']]],
-  ['mcpmode_13',['mcpMode',['../class_m_c_p___c_a_n.html#a58ff15c3bb97d0bd8f809dc6fb989609',1,'MCP_CAN::mcpMode()'],['../classmcp2518fd.html#a5ab6107738d626df9e58d65fae9b5d2f',1,'mcp2518fd::mcpMode()']]],
+  ['mcpmode_13',['mcpMode',['../classmcp2518fd.html#a5ab6107738d626df9e58d65fae9b5d2f',1,'mcp2518fd::mcpMode'],['../class_m_c_p___c_a_n.html#a58ff15c3bb97d0bd8f809dc6fb989609',1,'MCP_CAN::mcpMode']]],
   ['mdatabitratefactor_14',['mDataBitRateFactor',['../classmcp2518fd.html#ace3d5f3608eb35f8bf4e812e75fd00be',1,'mcp2518fd']]],
   ['mdataphasesegment1_15',['mDataPhaseSegment1',['../classmcp2518fd.html#a0fb278fbfe7a6b5d0d2d800f2469460e',1,'mcp2518fd']]],
   ['mdataphasesegment2_16',['mDataPhaseSegment2',['../classmcp2518fd.html#a3d729d3d14c793975b7bf9c18967f8ea',1,'mcp2518fd']]],
