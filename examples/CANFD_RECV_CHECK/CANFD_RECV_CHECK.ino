@@ -45,7 +45,7 @@ unsigned char buf[MAX_DATA_SIZE]; // Buffer to store incoming data
 void setup()
 {
   Serial.begin(115200); //Begin serial communication with PC
-
+  CAN.setMode(CAN_NORMAL_MODE); //Set the transceiver into normal mode
   while (0 != CAN.begin(CAN_125K_500K))// Initialize CAN BUS with baud rate of 125 kbps and arbitration rate of 500k
     // This should be in while loop because MCP2518
     // needs some time to initialize and start function
