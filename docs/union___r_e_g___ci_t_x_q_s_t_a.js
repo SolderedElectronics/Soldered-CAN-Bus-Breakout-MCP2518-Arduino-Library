@@ -4,7 +4,7 @@ var union___r_e_g___ci_t_x_q_s_t_a =
     [ "FifoIndex", "union___r_e_g___ci_t_x_q_s_t_a.html#a630283a14cf9f4b4404952ff7e1bb0b7", null ],
     [ "TxAborted", "union___r_e_g___ci_t_x_q_s_t_a.html#abbfe4e865ef7dfd2cdd3f64f79a3b1a2", null ],
     [ "TxAttemptIF", "union___r_e_g___ci_t_x_q_s_t_a.html#a3adf066dfb37ec9bdbb9ed4d1de7a7e2", null ],
-    [ "txBF", "union___r_e_g___ci_t_x_q_s_t_a.html#a9ead821db786c09f38e2828f55fa4a73", null ],
+    [ "txBF", "union___r_e_g___ci_t_x_q_s_t_a.html#a0ee4ebf34e5f071317d136bf6625effe", null ],
     [ "TxEmptyIF", "union___r_e_g___ci_t_x_q_s_t_a.html#a64e1c705280a9dce4899e1f93f1b436d", null ],
     [ "TxError", "union___r_e_g___ci_t_x_q_s_t_a.html#a77570852597cad21c69f796ca4e17b1e", null ],
     [ "TxLostArbitration", "union___r_e_g___ci_t_x_q_s_t_a.html#ad0b46199e6e7186a211481f1e2f92c8a", null ],

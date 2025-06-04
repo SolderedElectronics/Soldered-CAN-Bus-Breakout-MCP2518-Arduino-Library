@@ -56,9 +56,9 @@ var NAVTREEINDEX =
 "mcp2518fd__can_8h.html#a82dc1fe03f77fd9be1117162f8f6da47",
 "mcp2518fd__can__dfs_8h.html#a645daa3284ea9075e6fb0c578c9b830e",
 "mcp__can__fd_8h.html#a3ad450fa9b74c8d9fc57d81124acf08caaac7cf11e4ea50fdc489e233c87edbb4",
-"union___r_e_g___ci_f_i_f_o_c_o_n.html#a043b6196e74600dd2da692b38a3d70f9",
+"union___r_e_g___ci_f_i_f_o_c_o_n.html#a125db68fb03ffa02872248aa8bcfe755",
 "union___r_e_g___o_s_c.html#a25f78d00866a9b310b7cfe1ed35c5ca0"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';

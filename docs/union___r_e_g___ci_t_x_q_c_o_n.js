@@ -6,7 +6,7 @@ var union___r_e_g___ci_t_x_q_c_o_n =
     [ "PayLoadSize", "union___r_e_g___ci_t_x_q_c_o_n.html#a58cf93cec07c0482aa839586b2d80da0", null ],
     [ "TxAttemptIE", "union___r_e_g___ci_t_x_q_c_o_n.html#af9644ffb34abfc10f9ec483bb92ac9df", null ],
     [ "TxAttempts", "union___r_e_g___ci_t_x_q_c_o_n.html#a13d1f8fc0ed82cb2f296be3659c2c061", null ],
-    [ "txBF", "union___r_e_g___ci_t_x_q_c_o_n.html#a0c5090186f0dc823252d31a9e8c58161", null ],
+    [ "txBF", "union___r_e_g___ci_t_x_q_c_o_n.html#a32cfabca2900cf1e8b262904703ba820", null ],
     [ "TxEmptyIE", "union___r_e_g___ci_t_x_q_c_o_n.html#a9e8defc173d90d5102f5d29224f697b3", null ],
     [ "TxEnable", "union___r_e_g___ci_t_x_q_c_o_n.html#acc0726ef5540ed6d8b584be98d62a05e", null ],
     [ "TxNotFullIE", "union___r_e_g___ci_t_x_q_c_o_n.html#a00f83c87ee784aaed426147fddeb00c1", null ],
