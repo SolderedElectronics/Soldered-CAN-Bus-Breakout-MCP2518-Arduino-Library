@@ -218,7 +218,7 @@ private:
   int8_t mcp2518fd_ModuleEventEnable(CAN_MODULE_EVENT flags);
   int8_t mcp2518fd_OperationModeSelect(CAN_OPERATION_MODE opMode);
   CAN_OPERATION_MODE mcp2518fd_OperationModeGet();
-  void mcp2518fd_TransmitMessageQueue();
+  int8_t mcp2518fd_TransmitMessageQueue();
   int8_t mcp2518fd_TransmitChannelEventGet(CAN_FIFO_CHANNEL channel,
                                            CAN_TX_FIFO_EVENT *flags);
   int8_t mcp2518fd_ErrorCountStateGet(uint8_t *tec, uint8_t *rec,

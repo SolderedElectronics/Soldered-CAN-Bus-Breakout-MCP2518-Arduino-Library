@@ -64,7 +64,11 @@ byte mcp2518fd::begin(uint32_t speedset, const byte clockset) {
   speedset = bittime_compat_to_mcp2518fd(speedset);
 
   byte res = mcp2518fd_init(speedset, clockset);
-  return res;
+  if (res != 0) {
+    return CAN_FAILINIT; // Initialization failed (SPI communication error detected)
+  }
+  
+  return CAN_OK;
 }
 
 /**
@@ -1881,25 +1885,34 @@ int8_t mcp2518fd::mcp2518fd_LowPowerModeDisable() {
   return spiTransferError;
 }
 
-void mcp2518fd::mcp2518fd_TransmitMessageQueue(void) {
+int8_t mcp2518fd::mcp2518fd_TransmitMessageQueue(void) {
   uint8_t attempts = MAX_TXQUEUE_ATTEMPTS;
   CAN_ERROR_STATE errorFlags;
   uint8_t tec, rec;
+  int8_t spiTransferError = 0;
 
   // Check if FIFO is not full
   do {
-    mcp2518fd_TransmitChannelEventGet(APP_TX_FIFO, &txFlags);
+    spiTransferError = mcp2518fd_TransmitChannelEventGet(APP_TX_FIFO, &txFlags);
+    if (spiTransferError < 0) {
+      return -1; // SPI communication error
+    }
     if (attempts == 0) {
       Nop(); Nop();
       mcp2518fd_ErrorCountStateGet(&tec, &rec, &errorFlags);
-      return;
+      return -2; // Timeout waiting for FIFO to become available
     }
     attempts--;
   } while (!(txFlags & CAN_TX_FIFO_NOT_FULL_EVENT));
 
   // Load message and transmit
   uint8_t n = DRV_CANFDSPI_DlcToDataBytes((CAN_DLC)txObj.bF.ctrl.DLC);
-  mcp2518fd_TransmitChannelLoad(APP_TX_FIFO, &txObj, txd, n, true);
+  spiTransferError = mcp2518fd_TransmitChannelLoad(APP_TX_FIFO, &txObj, txd, n, true);
+  if (spiTransferError < 0) {
+    return spiTransferError; // Return error code from TransmitChannelLoad
+  }
+
+  return 0; // Success
 }
 
 /*********************************************************************************************************
@@ -1910,7 +1923,7 @@ byte mcp2518fd::mcp2518fd_sendMsg(const byte *buf, byte len, unsigned long id,
                                   byte ext, byte rtr, bool wait_sent) {
   uint8_t n;
   int i;
-  byte spiTransferError = 0;
+  int8_t spiTransferError = 0;
   // Configure message data
   txObj.word[0] = 0;
   txObj.word[1] = 0;
@@ -1938,8 +1951,26 @@ byte mcp2518fd::mcp2518fd_sendMsg(const byte *buf, byte len, unsigned long id,
     txd[i] = buf[i];
   }
 
-  mcp2518fd_TransmitMessageQueue();
-  return spiTransferError;
+  // Attempt to transmit message and check for errors
+  spiTransferError = mcp2518fd_TransmitMessageQueue();
+  if (spiTransferError < 0) {
+    // Map internal error codes to CAN error codes
+    if (spiTransferError == -1) {
+      return CAN_FAILINIT; // SPI communication error
+    } else if (spiTransferError == -2) {
+      return CAN_SENDMSGTIMEOUT; // Timeout waiting for FIFO
+    } else if (spiTransferError == -3) {
+      return CAN_FAILTX; // DLC mismatch error
+    } else if (spiTransferError == -4) {
+      return CAN_FAILINIT; // SPI write error
+    } else if (spiTransferError == -5) {
+      return CAN_FAILTX; // Channel update error
+    } else {
+      return CAN_FAILTX; // Other transmission error
+    }
+  }
+
+  return CAN_OK;
 }
 
 int8_t mcp2518fd::mcp2518fd_receiveMsg() {
@@ -2047,6 +2078,38 @@ uint8_t mcp2518fd::mcp2518fd_init(uint32_t speedset, const byte clock) {
   // Select Normal Mode
   // mcp2518fd_OperationModeSelect(CAN_CLASSIC_MODE);
   __setMode(mcpMode);
+
+  // Verify SPI connection using write-then-read test
+  // Read ECCCON register, modify it, write it back, then verify it was written correctly
+  // This is the most reliable way to detect if device is actually responding
+  delay(5); // Small delay to ensure device is ready
+  
+  uint8_t ecccon_original = 0;
+  uint8_t ecccon_test = 0;
+  uint8_t ecccon_readback = 0;
+  
+  // Read original ECCCON value
+  mcp2518fd_ReadByte(cREGADDR_ECCCON, &ecccon_original);
+  
+  // Create test value by toggling bit 0 (if it's 0, make it 1; if it's 1, make it 0)
+  // This ensures we're testing an actual change
+  ecccon_test = ecccon_original ^ 0x01;
+  
+  // Write test value
+  mcp2518fd_WriteByte(cREGADDR_ECCCON, ecccon_test);
+  delay(2); // Small delay for write to complete
+  
+  // Read back the value
+  mcp2518fd_ReadByte(cREGADDR_ECCCON, &ecccon_readback);
+  
+  // Restore original value
+  mcp2518fd_WriteByte(cREGADDR_ECCCON, ecccon_original);
+  
+  // If device is connected, the readback should match what we wrote
+  // If device is not connected, readback will be 0xFF (floating bus) or original value (no write occurred)
+  if (ecccon_readback != ecccon_test) {
+    return CAN_FAILINIT; // Write-then-read test failed, device not responding
+  }
 
   return 0;
 }
