@@ -1130,8 +1130,8 @@ int8_t mcp2518fd::mcp2518fd_BitTimeConfigureNominal() {
 
   // Arbitration Bit rate
   ciNbtcfg.bF.BRP = mBitRatePrescaler - 1;
-  ciNbtcfg.bF.TSEG1 = mArbitrationPhaseSegment1 - 1;
-  ciNbtcfg.bF.TSEG2 = mArbitrationPhaseSegment2 - 1;
+  ciNbtcfg.bF.TSEG1 = mArbitrationPhaseSegment1;
+  ciNbtcfg.bF.TSEG2 = mArbitrationPhaseSegment2;
   ciNbtcfg.bF.SJW = mArbitrationSJW - 1;
 
   // Write Bit time registers
