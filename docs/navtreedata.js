@@ -60,5 +60,6 @@ var NAVTREEINDEX =
 "union___r_e_g___o_s_c.html#a25f78d00866a9b310b7cfe1ed35c5ca0"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronization';
-var SYNCOFFMSG = 'click to enable panel synchronization';
+const SYNCONMSG = 'click to disable panel synchronization';
+const SYNCOFFMSG = 'click to enable panel synchronization';
+const LISTOFALLMEMBERS = 'List of all members';

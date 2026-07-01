@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['library_0',['CAN Transceiver MCP2518 board Arduino library',['../index.html',1,'']]]
+  ['design_0',['Hardware design',['../index.html#autotoc_md2',1,'']]],
+  ['documentation_1',['Documentation',['../index.html#autotoc_md3',1,'']]]
 ];
